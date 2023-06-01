@@ -21,6 +21,8 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
+        'oauthfilter' => \App\Filters\OauthFilter::class,
+        'options' => \App\Filters\Options::class,
     ];
 
     /**
@@ -29,6 +31,7 @@ class Filters extends BaseConfig
      */
     public array $globals = [
         'before' => [
+            'options'
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
@@ -60,5 +63,7 @@ class Filters extends BaseConfig
      * Example:
      * 'isLoggedIn' => ['before' => ['account/*', 'profiles/*']]
      */
-    public array $filters = [];
+    public array $filters = [
+        'oauthfilter' => ['before' =>['blog', 'blog/*']] //il primo blog include la prima richiesta
+    ];
 }
